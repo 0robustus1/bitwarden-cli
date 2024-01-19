@@ -54,7 +54,6 @@ jobs:
         with:
           driver: docker-container
           use: true
-          platforms: 'linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64'
       - name: Build and push Docker image
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
@@ -63,7 +62,7 @@ jobs:
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: 'linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64'
+          platforms: 'linux/amd64,linux/arm64'
           builder: ${{ steps.buildx.outputs.name }}
       - name: Create tag
         uses: actions/github-script@v6
