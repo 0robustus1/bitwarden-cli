@@ -1,14 +1,9 @@
-FROM debian:sid
+FROM node:current-alpine
+
+RUN apk add --no-cache --update python3 build-base
 
 ARG BW_CLI_VERSION
-
-RUN apt update && \
-    apt install -y wget unzip && \
-    wget https://github.com/bitwarden/clients/releases/download/cli-v${BW_CLI_VERSION}/bw-linux-${BW_CLI_VERSION}.zip && \
-    unzip bw-linux-${BW_CLI_VERSION}.zip && \
-    chmod +x bw && \
-    mv bw /usr/local/bin/bw && \
-    rm -rfv *.zip
+RUN npm install -g "@bitwarden/cli@${BW_CLI_VERSION}"
 
 COPY entrypoint.sh /
 
